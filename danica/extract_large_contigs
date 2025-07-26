@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH --job-name=split_danica_large
+#SBATCH --partition=defq
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=10G
+#SBATCH --time=00:30:00
+#SBATCH --output=split_danica_large_%A.out
+#SBATCH --error=split_danica_large_%A.err
+#SBATCH --mail-type=END
+#SBATCH --mail-user=alyjh38@nottingham.ac.uk
+
+source $HOME/.bash_profile
+conda activate gfastats_env
+
+INPUT_DIR="/gpfs01/home/alyjh38/junfang/Project_danica_Junfang/danica"
+cd $INPUT_DIR
+
+seqkit seq -m 1000000 -o CDAN001_n3.hic.hap1_large_contigs.fa CDAN001_n3.hic.hap1.p_ctg.fa
+seqkit seq -m 1000000 -o CDAN001_n3.hic.hap2_large_contigs.fa CDAN001_n3.hic.hap2.p_ctg.fa
+seqkit seq -m 1000000 -o CDAN001_n3.hic.hap3_large_contigs.fa CDAN001_n3.hic.hap3.p_ctg.fa
+
+echo "finished"
