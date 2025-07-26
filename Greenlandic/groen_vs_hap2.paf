@@ -1,0 +1,13 @@
+# 由于提交的slurm过多 ，所以这里在本地终端做的， 生成了 groen_vs_hap2.paf
+   groenlandica]$ minimap2 -x asm5 -t 8 CDAN001_n3.hic.hap2.p_ctg_large_contigs.fa cochlearia_groenlandica_18Oct2019_dfYNf.fasta_large_contigs.fa > groen_vs_hap2.paf
+[M::mm_idx_gen::2.859*1.17] collected minimizers
+[M::mm_idx_gen::3.094*1.67] sorted minimizers
+[M::main::3.094*1.67] loaded/built the index for 51 target sequence(s)
+[M::mm_mapopt_update::3.296*1.62] mid_occ = 204
+[M::mm_idx_stat] kmer size: 19; skip: 19; is_hpc: 0; #seq: 51
+[M::mm_idx_stat::3.460*1.59] distinct minimizers: 13536264 (87.13% are singletons); average occurrences: 1.710; average spacing: 9.981; total length: 230980628
+[M::worker_pipeline::42.109*4.90] mapped 7 sequences
+[M::main] Version: 2.30-r1287
+[M::main] CMD: minimap2 -x asm5 -t 8 CDAN001_n3.hic.hap2.p_ctg_large_contigs.fa cochlearia_groenlandica_18Oct2019_dfYNf.fasta_large_contigs.fa
+[M::main] Real time: 42.171 sec; CPU: 206.226 sec; Peak RSS: 9.157 GB
+# 生成 groen_vs_hap2.paf
