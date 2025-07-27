@@ -1,0 +1,33 @@
+####提取 hap2 和 groen 的直系一对一同源基因对
+library(dplyr)
+library(readr)
+
+# 读取正交群信息
+orthogroups <- read_tsv("Orthogroups.tsv")
+
+# 读取单拷贝正交群名
+single_copy_ogs <- read_lines("Orthogroups_SingleCopyOrthologues.txt")
+
+# 筛选出单拷贝正交群数据
+single_copy_df <- orthogroups %>%
+  filter(Orthogroup %in% single_copy_ogs)
+
+names(single_copy_df)
+
+# 提取 hap2 和 groen 的基因对
+gene_pairs <- single_copy_df %>%
+  rename(
+    groenlandica_large_contigs.faa = groen,
+    hap2_large_contigs.faa        = hap2
+  ) %>%
+  select(Orthogroup,
+         groenlandica_large_contigs.faa,
+         hap2_large_contigs.faa) %>%
+  filter(!is.na(groenlandica_large_contigs.faa),
+         !is.na(hap2_large_contigs.faa))
+
+# 可选：保存为 CSV
+write.csv(gene_pairs, "hap2_groen_single_copy_orthologs.csv", row.names = FALSE)
+
+# 查看前几行结果
+head(gene_pairs)
