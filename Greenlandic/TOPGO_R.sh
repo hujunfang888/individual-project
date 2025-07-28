@@ -29,3 +29,5 @@ resultFisher <- runTest(GOdata, algorithm = "classic", statistic = "fisher")
 
 allRes <- GenTable(GOdata, classicFisher = resultFisher, topNodes = 20)
 print(allRes)
+
+write.table(allRes, file = "topGO_lowid_results.txt", sep = "\t", quote = FALSE, row.names = FALSE)
