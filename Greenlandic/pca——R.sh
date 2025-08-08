@@ -1,3 +1,33 @@
+install.packages("ggfortify")
+library(tidyverse)
+library(ggfortify)  # 用于 autoplot PCA
+
+# 手动输入数据
+te_matrix <- tribble(
+  ~Species,       ~LTR,       ~LINE,   ~SINE,
+  "groenlandica", 1751953,     38197,   20196,
+  "hap2",         4400972,     39362,   10125,
+  "pyrenica",    31539495,     59236,    9550
+)
+
+# 从 PCA 对象中提取坐标数据
+data_pca <- as.data.frame(te_pca$x)
+
+# 添加样本名列（行名是 species）
+data_pca$Sample <- rownames(data_pca)
+
+# 可选：查看提取的数据
+head(data_pca)
+
+library(ggplot2)
+
+# 计算方差解释比例
+pca_var <- te_pca$sdev^2 / sum(te_pca$sdev^2)
+
+
+# 假设你的 PCA 结果是 data_pca
+# data_pca 应该包含 PC1, PC2, Sample 三列
+
 # 假设你的 PCA 结果是 data_pca
 # data_pca 应该包含 PC1, PC2, Sample 三列
 
