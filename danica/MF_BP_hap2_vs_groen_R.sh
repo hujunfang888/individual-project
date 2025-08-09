@@ -10,15 +10,15 @@ groen_mf <- read.delim("topGO_MF_groen_results.tsv", sep = "\t", stringsAsFactor
 hap2_goids <- hap2_mf$GO.ID
 groen_goids <- groen_mf$GO.ID
 
-# 差异项
+#difference terms
 hap2_only <- setdiff(hap2_goids, groen_goids)
 groen_only <- setdiff(groen_goids, hap2_goids)
 common_goids <- intersect(hap2_goids, groen_goids)
 
-# 输出数量
-cat("hap2 独有 GO terms:", length(hap2_only), "\n")
-cat("groen 独有 GO terms:", length(groen_only), "\n")
-cat("共有 GO terms:", length(common_goids), "\n")
+#input counts
+cat("hap2 unique GO terms:", length(hap2_only), "\n")
+cat("groen unique GO terms:", length(groen_only), "\n")
+cat("total GO terms:", length(common_goids), "\n")
 
 install.packages("VennDiagram")
 
@@ -55,15 +55,15 @@ groen_bp <- read.delim("topGO_BP_groen_results.tsv", sep = "\t", stringsAsFactor
 hap2_goids_bp <- hap2_bp$GO.ID
 groen_goids_bp <- groen_bp$GO.ID
 
-# 差异项
+#different items
 hap2_only_bp <- setdiff(hap2_goids_bp, groen_goids_bp)
 groen_only_bp <- setdiff(groen_goids_bp, hap2_goids_bp)
 common_goids_bp <- intersect(hap2_goids_bp, groen_goids_bp)
 
-# 输出数量
-cat("hap2 独有 GO terms (BP):", length(hap2_only_bp), "\n")
-cat("groen 独有 GO terms (BP):", length(groen_only_bp), "\n")
-cat("共有 GO terms (BP):", length(common_goids_bp), "\n")
+#input 
+cat("hap2 unique GO terms (BP):", length(hap2_only_bp), "\n")
+cat("groen unique GO terms (BP):", length(groen_only_bp), "\n")
+cat("total GO terms (BP):", length(common_goids_bp), "\n")
 
 hap2_only_terms_bp <- hap2_bp[hap2_bp$GO.ID %in% hap2_only_bp, c("GO.ID", "Term")]
 groen_only_terms_bp <- groen_bp[groen_bp$GO.ID %in% groen_only_bp, c("GO.ID", "Term")]
@@ -86,7 +86,7 @@ venn.diagram(
 
 
 
-####BP
+####here is for BP
 write.table(allRes_groen_BP,
             file = "topGO_BP_groen_results.tsv",
             sep = "\t", quote = FALSE, row.names = FALSE)
@@ -97,15 +97,15 @@ groen_bp <- read.delim("topGO_BP_groen_results.tsv", sep = "\t", stringsAsFactor
 hap2_goids_bp <- hap2_bp$GO.ID
 groen_goids_bp <- groen_bp$GO.ID
 
-# 差异项
+
 hap2_only_bp <- setdiff(hap2_goids_bp, groen_goids_bp)
 groen_only_bp <- setdiff(groen_goids_bp, hap2_goids_bp)
 common_goids_bp <- intersect(hap2_goids_bp, groen_goids_bp)
 
-# 输出数量
-cat("hap2 独有 GO terms (BP):", length(hap2_only_bp), "\n")
-cat("groen 独有 GO terms (BP):", length(groen_only_bp), "\n")
-cat("共有 GO terms (BP):", length(common_goids_bp), "\n")
+
+cat("hap2 unique GO terms (BP):", length(hap2_only_bp), "\n")
+cat("groen unique GO terms (BP):", length(groen_only_bp), "\n")
+cat("total GO terms (BP):", length(common_goids_bp), "\n")
 
 hap2_only_terms_bp <- hap2_bp[hap2_bp$GO.ID %in% hap2_only_bp, c("GO.ID", "Term")]
 groen_only_terms_bp <- groen_bp[groen_bp$GO.ID %in% groen_only_bp, c("GO.ID", "Term")]
