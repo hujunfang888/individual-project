@@ -18,7 +18,7 @@ for file in *.raw.fa; do
   echo -e "$type\t$len"
 done | awk '{te[$1] += $2} END {for (i in te) print i "\t" te[i]}' > TE_lengths_from_rawfa.tsv
 
-##groen 
+##for Groen 
 awk '$3 == "repeat_region"' cochlearia_TE_annotation.gff3 | \
 awk -F'\t' '{
   match($9, /classification=([^;]+)/, a);
@@ -34,7 +34,7 @@ for file in *.raw.fa; do
   echo -e "$type\t$len"
 done > TE_lengths_from_rawfa.tsv
 
-##pyr
+##for Pyr
 cat CPYR002hifiasm24_hic_hap1_6_large_contigs.fa.mod.LTR.intact.raw.gff3 \
     CPYR002hifiasm24_hic_hap1_6_large_contigs.fa.mod.TIR.intact.raw.gff3 \
     > pyrenica_TE_merged.gff3
@@ -57,12 +57,11 @@ done | awk '{te[$1] += $2} END {for (i in te) print i "\t" te[i]}' > TE_lengths_
 
 
 
-###R
+###on R
 install.packages("tidyverse")
-# 加载所需包
 library(tidyverse)
 
-# 读取三个物种的 TE 数据
+# reda three species data
 groen <- read_tsv("TE_lengths_groenlandica.tsv", col_names = c("TE_Type", "Length")) %>%
   mutate(Species = "groenlandica")
 hap2 <- read_tsv("TE_lengths_hap2.tsv", col_names = c("TE_Type", "Length")) %>%
@@ -70,14 +69,14 @@ hap2 <- read_tsv("TE_lengths_hap2.tsv", col_names = c("TE_Type", "Length")) %>%
 pyre <- read_tsv("TE_lengths_pyrenica.tsv", col_names = c("TE_Type", "Length")) %>%
   mutate(Species = "pyrenica")
 
-# 合并数据
+#mix data
 df <- bind_rows(groen, hap2, pyre)
 
-# 将数据转为宽格式，再转回长格式，确保缺失值补为0
+#convert the data to wide format and then back to long format, to ensure that the missing value is 0
 df_wide <- pivot_wider(df, names_from = TE_Type, values_from = Length, values_fill = 0)
 df_long <- pivot_longer(df_wide, cols = -Species, names_to = "TE_Type", values_to = "Length")
 
-# 作图（堆叠柱状图）
+# for printing stacked bar chart
 ggplot(df_long, aes(x = Species, y = Length / 1e6, fill = TE_Type)) +
   geom_bar(stat = "identity") +
   labs(title = "TE Composition across Three Genomes",
@@ -89,7 +88,7 @@ ggplot(df_long, aes(x = Species, y = Length / 1e6, fill = TE_Type)) +
 
 ggplot(df_long, aes(x = Species, y = Length / 1e6, fill = TE_Type)) +
   geom_bar(stat = "identity") +
-  geom_text(aes(label = round(Length / 1e6, 1)),  # 保留1位小数
+  geom_text(aes(label = round(Length / 1e6, 1)),  
             position = position_stack(vjust = 0.5), size = , color = "white") +
   labs(title = "TE Composition across Three Genomes",
        x = "Species", y = "Total TE Length (Mb)", fill = "TE Type") +
@@ -98,12 +97,11 @@ ggplot(df_long, aes(x = Species, y = Length / 1e6, fill = TE_Type)) +
         axis.text.y = element_text(size = 12),
         plot.title = element_text(hjust = 0.5, face = "bold"))
 
-##R for pca
+##R for pca plot
 install.packages("ggfortify")
 library(tidyverse)
 library(ggfortify)  # 用于 autoplot PCA
 
-# 手动输入数据
 te_matrix <- tribble(
   ~Species,       ~LTR,       ~LINE,   ~SINE,
   "groenlandica", 1751953,     38197,   20196,
@@ -111,29 +109,23 @@ te_matrix <- tribble(
   "pyrenica",    31539495,     59236,    9550
 )
 
-# 从 PCA 对象中提取坐标数据
 data_pca <- as.data.frame(te_pca$x)
 
-# 添加样本名列（行名是 species）
 data_pca$Sample <- rownames(data_pca)
 
-# 可选：查看提取的数据
 head(data_pca)
 
 library(ggplot2)
 
-# 计算方差解释比例
+#calculate the variance interpretation ratio
 pca_var <- te_pca$sdev^2 / sum(te_pca$sdev^2)
 
-
-# 假设你的 PCA 结果是 data_pca
-# data_pca 应该包含 PC1, PC2, Sample 三列
 
 library(ggrepel)
 
 ggplot(data_pca, aes(x = PC1, y = PC2, label = Sample)) +
   geom_point(size = 4, color = "steelblue") +
-  geom_text_repel(size = 5) +  # 自动避免标签重叠
+  geom_text_repel(size = 5) + 
   labs(title = "PCA of TE Family Composition",
        x = paste0("PC1 (", round(pca_var[1]*100, 2), "%)"),
        y = paste0("PC2 (", round(pca_var[2]*100, 2), "%)")) +
