@@ -1,4 +1,4 @@
-# 载入数据
+
 getwd()
 
 setwd("/Users/phoebe/Desktop/individual project/bigcontigs_real")
