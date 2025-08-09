@@ -17,29 +17,27 @@ GOdata_BP <- new("topGOdata",
                  annot = annFUN.gene2GO,
                  gene2GO = gene2go_list_bp)
 
-# 运行 Fisher 精确检验
+# processing Fisher to check accurately
 resultFisher_BP <- runTest(GOdata_BP, algorithm = "classic", statistic = "fisher")
 
-# 提取前 20 个 GO term 结果
+# select top 20 GO term results
 allRes
-
 
 allRes_BP <- GenTable(GOdata_BP,
                       classicFisher = resultFisher_BP,
                       orderBy = "classicFisher",
                       topNodes = 20)
 
-# 查看结果
+
 print(allRes_BP)
 
-# 保存为文件
 write.table(allRes_BP, file = "topGO_BP_results.tsv", sep = "\t", quote = FALSE, row.names = FALSE)
 
 ####MF
-# 筛选 MF 类型注释
+#Filter MF type annotations
 go_mf <- go_data[go_data$ontology == "MF", ]
 
-# 构建 gene2GO 列表
+# bulit gene2GO list
 gene2go_mf <- by(go_mf$goid, go_mf$qpid, function(x) unique(as.character(x)))
 gene2go_list_mf <- as.list(gene2go_mf)
 
@@ -61,17 +59,15 @@ allRes_MF <- GenTable(GOdata_MF,
                       orderBy = "classicFisher",
                       topNodes = 20)
 
-# 查看结果
 print(allRes_MF)
 
-# 保存为文件
 write.table(allRes_MF, file = "topGO_MF_results.tsv", sep = "\t", quote = FALSE, row.names = FALSE)
 
 
 
 
 
-###pics
+###here is for pics
 library(ggplot2)
 
 df$Term <- factor(df$Term, levels = rev(df$Term))
