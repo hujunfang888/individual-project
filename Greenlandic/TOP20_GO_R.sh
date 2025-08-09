@@ -1,7 +1,7 @@
 library(dplyr)
 top_go <- gene2go_enricher %>%
   count(GO_ID, sort = TRUE) %>%
-  top_n(20, n)  # 取前20条
+  top_n(20, n)  # select top20
 
 desc_vec <- c(
   "nucleic acid binding",
