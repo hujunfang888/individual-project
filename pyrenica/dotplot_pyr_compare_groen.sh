@@ -2,7 +2,7 @@ library(data.table)
 library(ggplot2)
 library(patchwork)
 
-# ===== CPYR002 vs hap2 =====
+# C.PYR vs hap2 
 paf1 <- fread("CPYR002_vs_hap2.paf", sep="\t", header=FALSE, fill=TRUE)
 colnames(paf1)[1:12] <- c("query","qlen","qstart","qend","strand","ref","rlen","rstart","rend","nmatch","alen","mapq")
 
@@ -11,7 +11,7 @@ p1 <- ggplot(paf1, aes(x=rstart, xend=rend, y=qstart, yend=qend)) +
   labs(x="hap2 large contigs", y="CPYR002 large contigs", title="Dotplot: PYR vs hap2") +
   theme_bw()
 
-# ===== groen vs hap2 =====
+#groen vs hap2
 paf2 <- fread("groen_vs_hap2.paf", sep="\t", header=FALSE, fill=TRUE)
 colnames(paf2)[1:12] <- c("query","qlen","qstart","qend","strand","ref","rlen","rstart","rend","nmatch","alen","mapq")
 
@@ -20,6 +20,6 @@ p2 <- ggplot(paf2, aes(x=rstart, xend=rend, y=qstart, yend=qend)) +
   labs(x="hap2 large contigs", y="groen large contigs", title="Dotplot: groen vs hap2") +
   theme_bw()
 
-# ===== 拼图展示 =====
+#showing
 p1 + p2 + plot_layout(ncol = 2)
 
