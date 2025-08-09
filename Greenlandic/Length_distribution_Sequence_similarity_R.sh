@@ -1,3 +1,4 @@
+###for length distribution 
 library(dplyr)
 
 gene_pairs <- single_copy_df %>%
@@ -12,39 +13,39 @@ library(Biostrings)
 library(dplyr)
 library(ggplot2)
 
-# 1. 读取 Prokka 产物的全蛋白 fasta
+#read whole protein fasta of the Prokka product
 groen_all <- readAAStringSet("groenlandica_large_contigs.faa")
 hap2_all  <- readAAStringSet("hap2_large_contigs.faa")
 
-# 2. 把 fasta 里的 names 简化为纯 ID（去掉 description）
+#simplify the names in fasta to pure ID  , removing description
 names(groen_all) <- sub(" .*", "", names(groen_all))
 names(hap2_all)  <- sub(" .*", "", names(hap2_all))
 
-# 3. 按照 gene_pairs 抽取子集
+#extract subsets according to gene_pairs
 sel_groen_prot <- groen_all[ gene_pairs$groen_id ]
 sel_hap2_prot  <- hap2_all[  gene_pairs$hap2_id  ]
 
-# 4. 检查是否有抽不到的 ID
+#check if there is an ID that cannot be retrieved
 miss_g <- setdiff(gene_pairs$groen_id, names(sel_groen_prot))
 miss_h <- setdiff(gene_pairs$hap2_id,  names(sel_hap2_prot))
-if(length(miss_g)) message("Groen 缺失：", paste0(miss_g, collapse=",")) 
-if(length(miss_h)) message("Hap2 缺失：",  paste0(miss_h, collapse=","))
+if(length(miss_g)) message("Groen missing：", paste0(miss_g, collapse=",")) 
+if(length(miss_h)) message("Hap2 missing：",  paste0(miss_h, collapse=","))
 
-# 5. 计算每条序列的长度
+#Calculate the length of each sequence
 len_df <- tibble(
   Orthogroup = gene_pairs$Orthogroup,
   groen_len   = width(sel_groen_prot[gene_pairs$groen_id]),
   hap2_len    = width(sel_hap2_prot[ gene_pairs$hap2_id])
 )
 
-# 6. 简单统计差异
+#simplely statistical differences
 len_df %>% 
   summarise(
     mean_diff = mean(groen_len - hap2_len),
     sd_diff   = sd(groen_len - hap2_len)
   ) %>% print()
 
-# 7. 绘制散点图
+# 7. 
 ggplot(len_df, aes(x = groen_len, y = hap2_len)) +
   geom_point(alpha = 0.6) +
   geom_abline(slope = 1, intercept = 0, 
@@ -56,7 +57,7 @@ ggplot(len_df, aes(x = groen_len, y = hap2_len)) +
   ) +
   theme_bw()
 
-###序列相似度分布
+### for sequence similarity
 
 if (!requireNamespace("BiocManager", quietly=TRUE)) install.packages("BiocManager")
 BiocManager::install("pwalign")
@@ -66,9 +67,6 @@ library(pwalign)
 library(Biostrings)
 library(dplyr)
 
-# 确保 sel_groen_prot 和 sel_hap2_prot 都已经按纯 ID 重命名好了
-# ─── 确保已加载 pwalign、Biostrings、dplyr、ggplot2 ─────────────────────
-# ─── sel_groen_prot 和 sel_hap2_prot 已按纯 ID 重命名并提取子集 ────────
 
 ids <- gene_pairs$groen_id
 
@@ -81,19 +79,17 @@ identity_vec <- vapply(seq_along(ids), function(i) {
     substitutionMatrix = "BLOSUM62",
     gapOpening = -10, gapExtension = -0.5
   )
-  pid(aln)  # 默认 PID1，全局相似度
+  pid(aln)  # default PID1, global similarity
 }, numeric(1))
 
-# 构造结果
+# built result
 id_df <- tibble(
   Orthogroup = gene_pairs$Orthogroup,
   identity   = identity_vec
 )
 
-# 查看分布概览
 print(summary(id_df$identity))
 
-# 绘制直方图
 ggplot(id_df, aes(x = identity)) +
   geom_histogram(bins = 30, fill = "steelblue", color = "black") +
   labs(
@@ -106,31 +102,29 @@ ggplot(id_df, aes(x = identity)) +
 
 
 
-####挑出低，高保守度同源对identity 阈值60%单独检查它们的配对是否靠谱，或者是不是功能差异最大的候选：
+# The threshold 60% individually checks:
+#whether their pairing is reliable or whether they are candidates with the largest functional differences:
 
 library(dplyr)
 
-# 1. 定义阈值
 threshold <- 60
 
-# 2. 从 id_df 挑出高保守的 Orthogroup
+#pick out highly conservative Orthogroup from id_df
 high_ogs <- id_df %>%
   filter(identity >= threshold) %>%
   pull(Orthogroup)
 
-# 3. 从 gene_pairs 中把这些 Orthogroup 对应的基因 ID 抽出来
+#extract the gene IDs corresponding to these Orthogroups from gene_pairs
 high_pairs <- gene_pairs %>%
   filter(Orthogroup %in% high_ogs)
 
-# 4. 分别获得两物种的 ID 列表
+#get ID lists for the two species separately
 high_groen_ids <- high_pairs$groen_id
 high_hap2_ids  <- high_pairs$hap2_id
 
-# 5. 保存到文件
+
 writeLines(high_groen_ids, "high_identity_groen_ids.txt")
 writeLines(high_hap2_ids,  "high_identity_hap2_ids.txt")
-
-# 可选：保存包括 Orthogroup 的表格
 write.csv(high_pairs, "high_identity_gene_pairs.csv", row.names = FALSE)
 
 
