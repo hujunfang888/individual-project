@@ -1,3 +1,5 @@
+###here is for drawing BP
+
 library(topGO)
 gene2go <- read.table("gene2go_topGO_cptxt.txt", sep="\t", header=FALSE, stringsAsFactors=FALSE)
 colnames(gene2go) <- c("gene", "go")
@@ -27,10 +29,10 @@ allRes_groen_BP <- GenTable(GOdata_groen_BP,
 
 print(allRes_groen_BP)
 
-# 确保数据存在
-df <- allRes_groen_BP  # 或你保存的 DataFrame
 
-# 画图
+df <- allRes_groen_BP 
+
+
 ggplot(df, aes(x = reorder(Term, Significant), y = Significant)) +
   geom_bar(stat = "identity", fill = "steelblue") +
   coord_flip() +
@@ -40,7 +42,7 @@ ggplot(df, aes(x = reorder(Term, Significant), y = Significant)) +
 go_data <- read.delim("GO_hap2_lowid.tsv..txt", sep = "\t", header = TRUE, stringsAsFactors = FALSE)
 
 
-###MF
+###here is for drawing MF
 gene2go <- read.table("gene2go_topGO_cptxt.txt", sep="\t", header=FALSE, stringsAsFactors=FALSE)
 colnames(gene2go) <- c("gene", "go")
 geneID2GO_groen <- strsplit(gene2go$go, ",")
@@ -73,10 +75,10 @@ library(ggplot2)
 
 library(ggplot2)
 
-# 确保数据存在
-df <- allRes_groen_MF  # 或你保存的 DataFrame
 
-# 画图
+df <- allRes_groen_MF  
+
+
 ggplot(df, aes(x = reorder(Term, Significant), y = Significant)) +
   geom_bar(stat = "identity", fill = "steelblue") +
   coord_flip() +
