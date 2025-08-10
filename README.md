@@ -148,8 +148,6 @@ I also acknowledge the use of the University of Nottingham High-Performance Comp
 ## Contact 
 Maintainer: Junfang Hu
 
-GitHub Issues**: Please use the [Issues](../../issues) page for bug reports and questions  
-
 Email: [alyjh38@nottingham.ac.uk]
 
 
