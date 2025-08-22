@@ -1,4 +1,5 @@
 # Comparative genomics of Cochlearia danica haplotype 2 and its putative parental species
+
 ## Background
 Allopolyploid species arise from hybridization between different parental species, combining two or more distinct genomes. Cochlearia danica is an allopolyploid plant with multiple haplotypes, and its origin has been debated. In this study, we focus on haplotype 2 (hap2) and compare it with two putative parents: C. groenlandica and C. pyrenaica.
 The goals are to:
@@ -20,6 +21,11 @@ Identify functional gene divergence that may underlie adaptive evolution after a
     E --> L[Dotplot visualisation]
     
 ##  Scripts Index 
+##### Note on Species Names
+During earlier stages of this project, some species names were mistakenly written with the wrong spelling in the code, figures, or documentation. Please note the correct names below:
+Cochlearia groenlandica (sometimes incorrectly written as greenlandic)
+Cochlearia pyrenaica (sometimes incorrectly written as pyrenica)
+These have now been corrected in the report and will be gradually updated across the repository.
 ### Genome quality assessment
 | Script                                                         | Species     | Function                                  | Input        | Output                 |
 | -------------------------------------------------------------- | ----------- | ----------------------------------------- | ------------ | ---------------------- |
