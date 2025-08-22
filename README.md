@@ -1,6 +1,6 @@
 # Comparative genomics of Cochlearia danica haplotype 2 and its putative parental species
 ## Background
-Allopolyploid species arise from hybridization between different parental species, combining two or more distinct genomes. Cochlearia danica is an allopolyploid plant with multiple haplotypes, and its origin has been debated. In this study, we focus on haplotype 2 (hap2) and compare it with two putative parents: C. groenlandica and C. pyrenica.
+Allopolyploid species arise from hybridization between different parental species, combining two or more distinct genomes. Cochlearia danica is an allopolyploid plant with multiple haplotypes, and its origin has been debated. In this study, we focus on haplotype 2 (hap2) and compare it with two putative parents: C. groenlandica and C. pyrenaica.
 The goals are to:
 Assess genome quality and select suitable assemblies for comparison.
 Compare genome-wide similarity, structural conservation, and transposable element (TE) composition.
