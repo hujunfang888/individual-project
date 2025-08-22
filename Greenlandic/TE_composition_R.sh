@@ -2,7 +2,7 @@ df_wide <- tibble::tribble(
   ~Species, ~LTR, ~LINE, ~SINE,
   "groenlandica", 1751953, 38197, 20196,
   "hap2", 4400972, 39362, 10125,
-  "pyrenica", 31539495, 59236, 9550
+  "pyrenaica", 31539495, 59236, 9550
 )
 
 library(tidyverse)
