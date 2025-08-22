@@ -1,13 +1,13 @@
 install.packages("ggfortify")
 library(tidyverse)
-library(ggfortify)  # 用于 autoplot PCA
+library(ggfortify)  
 
 # input data
 te_matrix <- tribble(
   ~Species,       ~LTR,       ~LINE,   ~SINE,
   "groenlandica", 1751953,     38197,   20196,
   "hap2",         4400972,     39362,   10125,
-  "pyrenica",    31539495,     59236,    9550
+  "pyrenaica",    31539495,     59236,    9550
 )
 
 # extract coordinate data from PCA objects
@@ -43,9 +43,8 @@ df_wide <- tibble::tribble(
   ~Species, ~LTR, ~LINE, ~SINE,
   "groenlandica", 1751953, 38197, 20196,
   "hap2", 4400972, 39362, 10125,
-  "pyrenica", 31539495, 59236, 9550
+  "pyrenaica", 31539495, 59236, 9550
 )
-
 
 
 #for drawing bar chart
