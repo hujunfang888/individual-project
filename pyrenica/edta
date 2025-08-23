@@ -20,4 +20,4 @@ EDTA.pl \
   --anno 1 \
   --threads 16
 
-conda deactivate#
+conda deactivate
