@@ -21,6 +21,7 @@ Identify functional gene divergence that may underlie adaptive evolution after a
     E --> L[Dotplot visualisation]
     
 ##  Scripts Index 
+### All scripts in scripts/ were developed by me unless otherwise stated. Where adapted from external sources, I have cited and credited the original authors in the script headers and in the References below.
 ##### Note on Species Names
 During earlier stages of this project, some species names were mistakenly written with the wrong spelling in the code, figures, or documentation. Please note the correct names below:
 Cochlearia groenlandica (sometimes incorrectly written as greenlandic)
@@ -72,6 +73,8 @@ These have now been corrected in the report and will be gradually updated across
 | `R_Copy_number.sh`                             | Greenlandic | Gene copy number plot                | annotation    | `.pdf` |
 | `top10_R.sh`                                   | Greenlandic | Top10 GO terms                       | GO table      | `.pdf` |
 
+## Data Aviliable
+### This repository does not include raw datasets (FASTQ/VCF etc.) because of unpublished/controlled data policies. All analyses are documented with scripts and small configuration/example files only.
 ## Data sources & formats
 #### Genomes: PacBio HiFi assemblies with Hi-C scaffolding for all species.
 #### Annotation: Prokka v1.14 for protein coding genes; TE annotation by EDTA & RepeatMasker.
