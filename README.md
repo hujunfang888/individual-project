@@ -31,47 +31,47 @@ These have now been corrected in the report and will be gradually updated across
 | Script                                                         | Species     | Function                                  | Input        | Output                 |
 | -------------------------------------------------------------- | ----------- | ----------------------------------------- | ------------ | ---------------------- |
 | `compleasm_large_contigs_10mb` / `compleasm_large_contigs_1mb` | all         | Compleasm (BUSCO) assembly completeness   | `.fa` genome | BUSCO/Compleasm report |
-| `compleasm_large_and_small_10mb`                               | Greenlandic | Compleasm with multiple length thresholds | `.fa` genome | BUSCO/Compleasm report |
+| `compleasm_large_and_small_10mb`                               | Groenlandica | Compleasm with multiple length thresholds | `.fa` genome | BUSCO/Compleasm report |
 | `gfastats.sh`                                                  | all         | Contig statistics                         | `.fa` genome | `.tsv` summary         |
 
 ### TE annotation & analysis
-| Script                                                         | Species     | Function                                  | Input        | Output                 |
-| -------------------------------------------------------------- | ----------- | ----------------------------------------- | ------------ | ---------------------- |
-| `compleasm_large_contigs_10mb` / `compleasm_large_contigs_1mb` | all         | Compleasm (BUSCO) assembly completeness   | `.fa` genome | BUSCO/Compleasm report |
-| `compleasm_large_and_small_10mb`                               | Greenlandic | Compleasm with multiple length thresholds | `.fa` genome | BUSCO/Compleasm report |
-| `gfastats.sh`                                                  | all         | Contig statistics                         | `.fa` genome | `.tsv` summary         |
+| Script                                                              | Species            | Function                         | Input      | Output                     |
+| ------------------------------------------------------------------- | ------------------ | -------------------------------- | ---------- | -------------------------- |
+| edta.sh / edta\_summary.sh                                          | all                | Comprehensive TE annotation | .fa genome | TE.gff / TE.fasta          |
+| repeatmasker\_gro.sh / repeatmasker\_hap2.sh / repeatmasker\_pyr.sh | Groenlandica / hap2 / pyrenaica | RepeatMasker TE masking          | .fa genome | masked genome / repeat.gff |
+| te\_stat\_groen.sh                                                  | Groenlandica       |        TE statistics and visualization                 | TE.gff     | TE summary / plots         |
+
 
 ### Gene annotation & orthology
 | Script                                          | Species     | Function                      | Input             | Output          |
 | ----------------------------------------------- | ----------- | ----------------------------- | ----------------- | --------------- |
 | `prokka.sh` / `prokka_gro.sh` / `prokka_pyr.sh` | all         | Prokka gene annotation        | `.fa` genome      | `.gff` / `.faa` |
 | `othofinder.sh` / `pyr_vs_hap2_Othofinder.sh`   | all         | Run OrthoFinder               | protein `.faa`    | orthogroups     |
-| `R_orthogroups.sh`                              | Greenlandic | Parse OrthoFinder outputs     | orthogroups table | `.tsv`          |
-| `hap2_groen_genepair.sh R`                      | Greenlandic | Extract 1-to-1 ortholog pairs | orthogroups       | gene pair list  |
+| `R_orthogroups.sh`                              | Groenlandica | Parse OrthoFinder outputs     | orthogroups table | `.tsv`          |
+| `hap2_groen_genepair.sh R`                      | Groenlandica | Extract 1-to-1 ortholog pairs | orthogroups       | gene pair list  |
 
 ### Functional enrichment
 | Script                                                    | Species              | Function                               | Input               | Output           |
 | --------------------------------------------------------- | -------------------- | -------------------------------------- | ------------------- | ---------------- |
 | `seqkit.sh` / `seqkit_high.sh` / `seqkit_for_pannzer2.sh` | all                  | Extract protein sequences for PANNZER2 | `.faa`              | `.faa` subset    |
-| `eggnog.sh` / `eggnog_anno.sh`                            | danica / Greenlandic | EggNOG annotation                      | `.faa`              | functional table |
-| `topgo.R`                                                 | danica               | GO enrichment analysis                 | gene2GO mapping     | enriched GO list |
+| `eggnog.sh` / `eggnog_anno.sh`                            | danica hap2 / Groenlandica | EggNOG annotation                      | `.faa`              | functional table |
+| `topgo.R`                                                 | danica hap2               | GO enrichment analysis                 | gene2GO mapping     | enriched GO list |
 | `TOP20_GO_R.sh` / `TOPGO__MF_BP_R.sh`                     | all                  | GO visualisation (barplots, BP/MF)     | GO enrichment table | `.pdf` / `.png`  |
-| `MF_BP_hap2_vs_groen_R.sh`                                | danica               | BP & MF plots (hap2 vs groen)          | GO enrichment       | `.pdf`           |
+| `MF_BP_hap2_vs_groen_R.sh`                                | danica hap2              | BP & MF plots (hap2 vs groen)          | GO enrichment       | `.pdf`           |
 
 ###  Whole-genome similarity
 | Script                                             | Species  | Function                  | Input         | Output          |
 | -------------------------------------------------- | -------- | ------------------------- | ------------- | --------------- |
 | `mash_distance.sh`                                 | all      | Calculate Mash distances  | `.fa` genome  | distance matrix |
 | `hap2_vs_groen_genepair.sh` / `hap2_vs_pyr_paf.sh` | all      | Pairwise genome alignment | `.fa` genomes | `.paf`          |
-| `dotplot_pyr_compare_groen.sh`                     | pyrenica | Dotplot comparison        | `.paf`        | `.pdf`          |
+| `dotplot_pyr_compare_groen.sh`                     | pyrenaica groenlandica | Dotplot comparison        | `.paf`        | `.pdf`          |
 
 ### Data visualisation
 | Script                                         | Species     | Function                             | Input         | Output |
 | ---------------------------------------------- | ----------- | ------------------------------------ | ------------- | ------ |
-| `Length_distribution_Sequence_similarity_R.sh` | Greenlandic | Length & identity distribution plots | ortholog list | `.pdf` |
-| `pca——R.sh`                                    | Greenlandic | PCA plots                            | TE matrix     | `.pdf` |
-| `R_Copy_number.sh`                             | Greenlandic | Gene copy number plot                | annotation    | `.pdf` |
-| `top10_R.sh`                                   | Greenlandic | Top10 GO terms                       | GO table      | `.pdf` |
+| `Length_distribution_Sequence_similarity_R.sh` | Groenlandica hap2 | Length & identity distribution plots | ortholog list | `.pdf` |
+| `pca——R.sh`                                    | Groenlandica hap2 | PCA plots                            | TE matrix     | `.pdf` |
+| `R_Copy_number.sh`                             | Groenlandica hap2 | Gene copy number plot                | annotation    | `.pdf` |
 
 ## Data Aviliable
 ### This repository does not include raw datasets (FASTQ/VCF etc.) because of unpublished/controlled data policies. All analyses are documented with scripts and small configuration/example files only.
