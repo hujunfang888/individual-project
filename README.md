@@ -142,7 +142,6 @@ Yu, G., Wang, L.G., Han, Y. and He, Q.Y. (2012) ‘clusterProfiler: an R package
 
 Alexa, A. and Rahnenfuhrer, J. (2025) topGO: Enrichment Analysis for Gene Ontology. R package version 2.60.1. Available at: https://bioconductor.org/packages/topGO (Accessed: 27 August 2025).
 
-Benjamini, Y. and Hochberg, Y. (1995) ‘Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing’, Journal of the Royal Statistical Society. Series B (Methodological), 57(1), pp. 289–300. Available at: https://doi.org/10.1111/j.2517-6161.1995.tb02031.x.
 
 ### Data visualization and R environment
 Wickham, H. (2016) ggplot2: elegant graphics for data analysis. 2nd edn. Cham: Springer International Publishing. Available at: https://doi.org/10.1007/978-3-319-24277-4.
