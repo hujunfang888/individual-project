@@ -53,14 +53,6 @@ ggplot(top_go, aes(x = reorder(desc, n), y = n)) +
   theme_minimal()
 
 
- ###bubble
 
- 
-library(ggplot2)
-ggplot(top_go, aes(x = n, y = desc, size = n, color = n)) +
-  geom_point(alpha = 0.8) +
-  scale_size(range = c(2, 10)) +
-  labs(x="Gene Count", y="GO Function", title="Bubble Plot of GO Annotation") +
-  theme_bw(base_size = 14)
 
   
