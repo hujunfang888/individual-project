@@ -48,7 +48,7 @@ These have now been corrected in the report and will be gradually updated across
 | `prokka.sh` / `prokka_gro.sh` / `prokka_pyr.sh` | all         | Prokka gene annotation        | `.fa` genome      | `.gff` / `.faa` |
 | `othofinder.sh to othofinde_Gro_hap2.sh`   | C.grolendica and C.hap2        | Run OrthoFinder               | protein `.faa`    | orthogroups     |
 | `R_orthogroups.sh`                              | C.groenlandica | Parse OrthoFinder outputs     | orthogroups table | `.tsv`          |
-| `hap2_groen_genepair.sh R`                      | C.groenlandica | Extract 1-to-1 ortholog pairs | orthogroups       | gene pair list  |
+| `hap2_groen_genepair_R.sh`                      | C.groenlandica | Extract 1-to-1 ortholog pairs | orthogroups       | gene pair list  |
 
 ### Functional enrichment
 | Script                                                    | Species              | Function                               | Input               | Output           |
@@ -57,7 +57,7 @@ These have now been corrected in the report and will be gradually updated across
 | `eggnog.sh` / `eggnog_anno.sh`                            | C.danica /C.hap2 /C.groenlandica | EggNOG annotation                      | `.faa`              | functional table |
 | `topgo.R`                                                 | C.hap2               | GO enrichment analysis                 | gene2GO mapping     | enriched GO list |
 | `TOP20_GO_R.sh` / `TOPGO__MF_BP_R.sh`                     | all                  | GO visualisation (barplots, BP/MF)     | GO enrichment table | `.pdf` / `.png`  |
-| `MF_BP_hap2_vs_groen_R.sh`                                | C.danica and C.hap2              | BP & MF plots (hap2 vs groen)          | GO enrichment       | `.pdf`           |
+| `MF_BP_hap2_vs_groen_R.sh`                                | C.groenlandica and C.hap2              | BP & MF plots (hap2 vs groen)          | GO enrichment       | `.pdf`           |
 
 ###  Whole-genome similarity
 | Script                                             | Species  | Function                  | Input         | Output          |
@@ -70,7 +70,7 @@ These have now been corrected in the report and will be gradually updated across
 | Script                                         | Species     | Function                             | Input         | Output |
 | ---------------------------------------------- | ----------- | ------------------------------------ | ------------- | ------ |
 | `Length_distribution_Sequence_similarity_R.sh` | C.groenlandica and  C.hap2 | Length & identity distribution plots | ortholog list | `.pdf` |
-| `pca——R.sh`                                    | C.groenlandica and  C.hap2 | PCA plots                            | TE matrix     | `.pdf` |
+| `pca_R.sh`                                    | C.groenlandica and  C.hap2 | PCA plots                            | TE matrix     | `.pdf` |
 | `R_Copy_number.sh`                             | C.groenlandica and C.hap2 | Gene copy number plot                | annotation    | `.pdf` |
 
 ## Data Aviliable
