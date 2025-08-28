@@ -106,49 +106,50 @@ These have now been corrected in the report and will be gradually updated across
 
 ## Citation
 ### Genome assembly quality assessment
-Cabanettes, F., & Klopp, C. (2021). gfastats: Conversion, evaluation and manipulation of genome assemblies. Bioinformatics, 37(22), 3980–3982.
+Formenti, G. et al. (2022) Gfastats: conversion, evaluation and manipulation of genome sequences using assembly graphs. Bioinformatics, 38(17), pp. 4214–4216. Available at: https://doi.org/10.1093/bioinformatics/btac460.
 
-Wang, S., et al. (2022). Compleasm: Accurate and fast assessment of genome assembly completeness. Bioinformatics.
+Kurtz, S. et al. (2004) Versatile and open software for comparing large genomes. Genome biology, 5(2), R12. Available at: https://doi.org/10.1186/gb-2004-5-2-r12.
 
-Manni, M., Berkeley, M. R., Seppey, M., Simão, F. A., & Zdobnov, E. M. (2021). BUSCO update: Novel and streamlined workflows along with broader and deeper phylogenetic coverage for scoring of eukaryotic, prokaryotic, and viral genomes. Molecular Biology and Evolution, 38(10), 4647–4654.
+Ondov, B.D. et al. (2016) Mash: fast genome and metagenome distance estimation using MinHash. Genome Biology, 17(1). Available at: https://doi.org/10.1186/s13059-016-0997-x.
 
-### Whole-genome similarity and alignment
-Ondov, B. D., et al. (2016). Mash: Fast genome and metagenome distance estimation using MinHash. Genome Biology, 17, 132.
+### Genome annotation and completeness assessment
+Seemann, T. (2014) ‘Prokka: rapid prokaryotic genome annotation’, Bioinformatics, 30(14), pp. 2068–2069. Available at: https://doi.org/10.1093/bioinformatics/btu153.
 
-Li, H. (2018). Minimap2: Pairwise alignment for nucleotide sequences. Bioinformatics, 34(18), 3094–3100.
+Simão, F.A. et al. (2015) ‘BUSCO: assessing genome assembly and annotation completeness with single-copy orthologs’, Bioinformatics, 31(19), pp. 3210–3212. Available at: https://doi.org/10.1093/bioinformatics/btv351.
 
-Kurtz, S., et al. (2004). Versatile and open software for comparing large genomes. Genome Biology, 5(2), R12.
+Huang, N. and Li, H. (2023) ‘compleasm: a faster and more accurate reimplementation of BUSCO’, Bioinformatics, 39(10). Available at: https://doi.org/10.1093/bioinformatics/btad595.
 
-### Gene annotation & orthology
-Seemann, T. (2014). Prokka: Rapid prokaryotic genome annotation. Bioinformatics, 30(14), 2068–2069.
+Lovell, J.T. et al. (2022) ‘GENESPACE tracks regions of interest and gene copy number variation across multiple genomes’, eLife, 11. Available at: https://doi.org/10.7554/eLife.78526.
 
-Emms, D. M., & Kelly, S. (2019). OrthoFinder: Phylogenetic orthology inference for comparative genomics. Genome Biology, 20, 238.
+Törönen, P., Medlar, A. and Holm, L. (2018) ‘PANNZER2: a rapid functional annotation web server’, Nucleic Acids Research, 46(W1), pp. W84–W88. Available at: https://doi.org/10.1093/nar/gky350.
 
-Shen, W., et al. (2016). SeqKit: A cross-platform and ultrafast toolkit for FASTA/Q file manipulation. PLoS ONE, 11(10), e0163962.
+### Sequence alignment and manipulation
+Li, H. (2018) ‘Minimap2: pairwise alignment for nucleotide sequences’, Bioinformatics, 34(18), pp. 3094–3100. Available at: https://doi.org/10.1093/bioinformatics/bty191.
 
-### Functional annotation & enrichment
-Törönen, P., Medlar, A., & Holm, L. (2018). PANNZER2: A rapid functional annotation web server. Nucleic Acids Research, 46(W1), W84–W88.
+Shen, W. et al. (2016) ‘SeqKit: A Cross-Platform and Ultrafast Toolkit for FASTA/Q File Manipulation’, PLoS ONE, 11(10). Available at: https://doi.org/10.1371/journal.pone.0163962.
 
-Yu, G., et al. (2012). clusterProfiler: An R package for comparing biological themes among gene clusters. OMICS, 16(5), 284–287.
+### Transposable element annotation and classification
+Ou, S. et al. (2019) ‘Benchmarking transposable element annotation methods for creation of a streamlined, comprehensive pipeline’, Genome Biology, 20(1). Available at: https://doi.org/10.1186/s13059-019-1905-y.
 
-Alexa, A., & Rahnenfuhrer, J. (2016). topGO: Enrichment analysis for Gene Ontology. R package version 2.42.0.
+Smit, A.F.A., Hubley, R. and Green, P. (2013) RepeatMasker Open-4.0. Available at: http://www.repeatmasker.org (Accessed: 6 August 2025).
 
-Fisher, R. A. (1935). The Design of Experiments. Oliver and Boyd.
+Wicker, T. et al. (2007) ‘A unified classification system for eukaryotic transposable elements’, Nature Reviews Genetics, 8(12), pp. 973–982. Available at: https://doi.org/10.1038/nrg2165.
 
-Benjamini, Y., & Hochberg, Y. (1995). Controlling the false discovery rate: A practical and powerful approach to multiple testing. Journal of the Royal Statistical Society: Series B, 57(1), 289–300.
+### Functional enrichment and statistical analysis
+Emms, D.M. and Kelly, S. (2019) ‘OrthoFinder: phylogenetic orthology inference for comparative genomics’, Genome Biology, 20(1). Available at: https://doi.org/10.1186/s13059-019-1832-y.
 
-### Transposable element annotation
-Ou, S., et al. (2019). EDTA: Extensive de-novo TE annotator for eukaryotic genomes. bioRxiv, 2019.
+Yu, G., Wang, L.G., Han, Y. and He, Q.Y. (2012) ‘clusterProfiler: an R package for comparing biological themes among gene clusters’, OMICS: A Journal of Integrative Biology, 16(5), pp. 284–287. Available at: https://doi.org/10.1089/omi.2011.0118.
 
-Smit, AFA., Hubley, R., & Green, P. (2013–2025). RepeatMasker Open-4.0. http://www.repeatmasker.org
+Alexa, A. and Rahnenfuhrer, J. (2025) topGO: Enrichment Analysis for Gene Ontology. R package version 2.60.1. Available at: https://bioconductor.org/packages/topGO (Accessed: 27 August 2025).
 
-### Data analysis and visualisation
-Wickham, H. (2016). ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York.
+Benjamini, Y. and Hochberg, Y. (1995) ‘Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing’, Journal of the Royal Statistical Society. Series B (Methodological), 57(1), pp. 289–300. Available at: https://doi.org/10.1111/j.2517-6161.1995.tb02031.x.
 
-Tang, Y., Horikoshi, M., & Li, W. (2016). ggfortify: Unified interface to visualize statistical results of popular R packages. The R Journal, 8(2), 478–489.
+### Data visualization and R environment
+Wickham, H. (2016) ggplot2: elegant graphics for data analysis. 2nd edn. Cham: Springer International Publishing. Available at: https://doi.org/10.1007/978-3-319-24277-4.
 
-R Core Team (2024). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. https://www.R-project.org/
+Tang, Y., Horikoshi, M. and Li, W. (2016) ‘ggfortify: unified interface to visualize statistical results of popular R packages’, The R Journal, 8(2), pp. 478–489.
 
+R Core Team (2024) R: A language and environment for statistical computing. Vienna: R Foundation for Statistical Computing. Available at: https://www.R-project.org/ (Accessed: 26 August 2025).
 
 ## Acknowledgements
 I sincerely thank Professor Levi Yant and his laboratory for providing the genomic data used in this study, as well as their valuable support and guidance throughout the research.
