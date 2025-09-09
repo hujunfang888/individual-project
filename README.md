@@ -1,7 +1,7 @@
-# Comparative genomics of Cochlearia danica haplotype 2 and its putative parental species
+# Comparative genomics reveals Cochlearia groenlandica as a major parental lineage of C. danica haplotype 2
 
 ## Background
-Allopolyploid species arise from hybridization between different parental species, combining two or more distinct genomes. Cochlearia danica is an allopolyploid plant with multiple haplotypes, and its origin has been debated. In this study, we focus on haplotype 2 (hap2) and compare it with two putative parents: C. groenlandica and C. pyrenaica.
+Allopolyploid species arise from hybridization between different parental species, combining two or more distinct genomes. Cochlearia danica is an allopolyploid/ allohexaploid plant with multiple haplotypes, and its origin has been debated. In this study, I focus on haplotype 2 (hap2) and compare it with two pptencial parents: C. groenlandica and C. pyrenaica.
 The goals are to:
 Assess genome quality and select suitable assemblies for comparison.
 Compare genome-wide similarity, structural conservation, and transposable element (TE) composition.
@@ -9,11 +9,11 @@ Identify functional gene divergence that may underlie adaptive evolution after a
 ## Workflow
 ### 
     A[Genome assemblies] --> B[Quality assessment: gfastats + Compleasm]
-    B --> C[Filter contigs by length]
+    B --> C[Filter contigs by length(use 10 mb and 1mb thresholds)]
     C --> D[TE annotation: EDTA + RepeatMasker]
-    C --> E[Whole-genome similarity: Mash + minimap2]
-    C --> F[Protein annotation: Prokka]
-    F --> G[Orthology inference: OrthoFinder]
+    C --> E[Protein annotation: Prokka]
+    C --> F[Orthology inference: OrthoFinder]
+    F --> G[Whole-genome similarity: Mash + minimap2]
     G --> H[Pairwise identity & length distribution]
     H --> I[Low-identity gene set (<60%)]
     I --> J[GO annotation & enrichment: PANNZER2 + clusterProfiler + topGO]
@@ -74,7 +74,7 @@ These have now been corrected in the report and will be gradually updated across
 | `R_Copy_number.sh`                             | C.groenlandica and C.hap2 | Gene copy number plot                | annotation    | `.pdf` |
 
 ## Data Aviliable
-### This repository does not include raw datasets (FASTQ/VCF etc.) because of unpublished/controlled data policies. All analyses are documented with scripts and small configuration/example files only.
+### This repository does not include raw datasets (FASTQ/VCF etc.) because of controlled data policies. All analyses are documented with scripts and small example files only.
 ## Data sources & formats
 #### Genomes: PacBio HiFi assemblies with Hi-C scaffolding for all species.
 #### Annotation: Prokka v1.14 for protein coding genes; TE annotation by EDTA & RepeatMasker.
