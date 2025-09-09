@@ -19,9 +19,37 @@ Identify functional gene divergence that may underlie adaptive evolution after a
     I --> J[GO annotation & enrichment: PANNZER2 + clusterProfiler + topGO]
     D --> K[TE composition analysis: R + PCA + stacked bar plots]
     E --> L[Dotplot visualisation]
-    
+
+##  Folders and scripts
+
+All scripts are `sbatch` jobs for Ada HPC. ‘awk’ works were run locally on my laptop since they finish much faster without queuing. 
+- Conda environments needed such as `gfastats_env`, `compleasm_env`, `repeatmasker_env`, `edta_env`, `orthofinder_env` , and an R environment with topGO and ggplot2.  
+### 1. `Genome_Quality/`
+- `gfastats_*.sh` – run gfastats to get contig and scaffold statistics.  
+- `compleasm_*.sh` – run Compleasm with BUSCO (brassicales lineage) to check assembly completeness (tested with 1 Mb and 10 Mb cutoffs).  
+
+### 2. `TE/`
+- `EDTA_*.sh` – run EDTA for de novo TE annotation.  
+- `RepeatMasker_*.sh` – run RepeatMasker with `-species viridiplantae` to identify repeats.  
+- `TE_length_awk_summary.sh` – calculate genome coverage and TE class lengths.  
+- `TE_statistics_*.sh` – check overlap between TE and CDS using bedtools.  
+- `TE_PCA_R.sh` – PCA of TE composition.  
+- `TE_composition_R.sh` – barplots of TE classes.
+  
+### 3. `OrthoFinder/`
+- `Prokka_*.sh` – annotate CDS and proteins with Prokka.  
+- `OrthoFinder_Groen_Hap2.sh` – find orthologous genes with OrthoFinder.  
+- `Mash_*.sh` – compute genome distances with Mash
+- `Groen_Hap2_PAFfile_for_dotplot.sh` – minimap2 alignment for dotplots.  
+
+### 4. `GOenrichment/`
+- `TOPGO_BP_MF_*.sh` – GO enrichment tests (BP and MF) using topGO.  
+- `Length_distribution_and_Sequence_similarity_R.sh` – plot protein length distributions and similarities.  
+- `seqkit_for_Pannzer2.sh` – prepare sequences for Pannzer2 functional annotation.  
+- `single_copy_gene_hap2_groenlandica.sh` – prepare single-copy orthologs for GO.  
+
 ##  Scripts Index 
-### All scripts in scripts/ were developed by me unless otherwise stated. Where adapted from external sources, I have cited and credited the original authors in the script headers and in the References below.
+### All scripts in folders were developed by me. Where adapted from external sources, I have cited and credited the original authors in the script headers and in the References below.
 ##### Note on Species Names
 During earlier stages of this project, some species names were mistakenly written with the wrong spelling in the code, figures, or documentation. Please note the correct names below:
 Cochlearia groenlandica (sometimes incorrectly written as greenlandic)
@@ -30,48 +58,34 @@ These have now been corrected in the report and will be gradually updated across
 ### Genome quality assessment
 | Script                                                         | Species     | Function                                  | Input        | Output                 |
 | -------------------------------------------------------------- | ----------- | ----------------------------------------- | ------------ | ---------------------- |
-| `compleasm_large_contigs_10mb` / `compleasm_large_contigs_1mb` | all         | Compleasm (BUSCO) assembly completeness   | `.fa` genome | BUSCO/Compleasm report |
-| `compleasm_large_and_small_10mb`                               | C.groenlandica | Compleasm with multiple length thresholds | `.fa` genome | BUSCO/Compleasm report |
-| `gfastats.sh`                                                  | all         | Contig statistics                         | `.fa` genome | `.tsv` summary         |
+| `compleasm_10mb` / `compleasm_1mb` | all   | Compleasm (BUSCO) assembly completeness   | `.fa` genome | BUSCO/Compleasm report |
+| `gfastats_*.sh`       | all     | Contig statistics    | `.fa` genome | `.tsv` summary   |
 
 ### TE annotation & analysis
 | Script                                                              | Species            | Function                         | Input      | Output                     |
 | ------------------------------------------------------------------- | ------------------ | -------------------------------- | ---------- | -------------------------- |
-| edta.sh / edta\_summary.sh                                          | all                | Comprehensive TE annotation | .fa genome | TE.gff / TE.fasta          |
-| repeatmasker\_gro.sh / repeatmasker\_hap2.sh / repeatmasker\_pyr.sh | C.groenlandica / C.hap2 / C.pyrenaica | RepeatMasker TE masking          | .fa genome | masked genome / repeat.gff |
-| te\_stat\_groen.sh                                                  | C.groenlandica       |        TE statistics and visualization                 | TE.gff     | TE summary / plots         |
+| `EDTA_*.sh `      | all                | Comprehensive TE annotation | `.fa` genome | `TE.gff` / `TE.fasta`          |
+| `RepeatMasker_*.sh` | all | RepeatMasker TE masking          |` .fa` genome | masked genome / `repeat.gff` |
+| `TE_statistics_groen.sh`  | C.groenlandica  |  TE statistics and visualization    | `TE.gff`     | Number of CDS overlapped by `TE.bed`  |
+| `TE_PCA_R.sh`  |all | PCA for species| TE length of three genome/`TE.tsv`|PCA plot on R|
+| `TE_composition_R.sh`| all|  composition of TE clasees across genomes| data| TEplot|
+| `TE_length_awk_summary.sh`| all | TE total length statistic | `raw.gff3` | `.tsv` |
 
-
-### Gene annotation & orthology
+### Orthofinder
 | Script                                          | Species     | Function                      | Input             | Output          |
 | ----------------------------------------------- | ----------- | ----------------------------- | ----------------- | --------------- |
-| `prokka.sh` / `prokka_gro.sh` / `prokka_pyr.sh` | all         | Prokka gene annotation        | `.fa` genome      | `.gff` / `.faa` |
-| `othofinder.sh to othofinde_Gro_hap2.sh`   | C.grolendica and C.hap2        | Run OrthoFinder               | protein `.faa`    | orthogroups     |
-| `R_orthogroups.sh`                              | C.groenlandica | Parse OrthoFinder outputs     | orthogroups table | `.tsv`          |
-| `hap2_groen_genepair_R.sh`                      | C.groenlandica | Extract 1-to-1 ortholog pairs | orthogroups       | gene pair list  |
+| `prokka_*.sh` | all     | Prokka gene annotation  | `.fa` genome   | `.gff` / `.faa` |
+| `Othofinder_Groen_Hap2.sh`   | C.grolendica and C.hap2   | Run OrthoFinder   | protein `.faa`    | orthogroups     |
+| `Groen_Hap2_PAFfile_for_dotplot.sh`  | C.groenlandica and C.hap2 | drawing dotplots('hap2 vc groenlandica' and'hap2 vs pyrenaica') and put them togeter |`.paf` files | dotplot on R|       
+| `Mash_hap2_*.sh` | all | compute genomes(groenlandica and pyrenaica) distances with Mash| `.fa`  | `.msh ` |
 
-### Functional enrichment
+### GOenrichment
 | Script                                                    | Species              | Function                               | Input               | Output           |
 | --------------------------------------------------------- | -------------------- | -------------------------------------- | ------------------- | ---------------- |
-| `seqkit.sh` / `seqkit_high.sh` / `seqkit_for_pannzer2.sh` | all                  | Extract protein sequences for PANNZER2 | `.faa`              | `.faa` subset    |
-| `eggnog.sh` / `eggnog_anno.sh`                            | C.danica /C.hap2 /C.groenlandica | EggNOG annotation                      | `.faa`              | functional table |
-| `topgo.R`                                                 | C.hap2               | GO enrichment analysis                 | gene2GO mapping     | enriched GO list |
-| `TOP20_GO_R.sh` / `TOPGO__MF_BP_R.sh`                     | all                  | GO visualisation (barplots, BP/MF)     | GO enrichment table | `.pdf` / `.png`  |
-| `MF_BP_hap2_vs_groen_R.sh`                                | C.groenlandica and C.hap2              | BP & MF plots (hap2 vs groen)          | GO enrichment       | `.pdf`           |
+| `seqkit_for_Pannzer2.sh` |all | Extract protein sequences for PANNZER2 | `.faa` | `.faa` subset    |
+|  `TOPGO_BP_MF_*.sh`     | C. groenlandica and C. hap2  | GO visualisation (barplots, BP and MF)| GO enrichment table | `.pdf` / `.png`  |
+| `Length_distribution_ang_Sequence_similarity_R.sh`| C. groenlandica and C. hap2 |Length distribution and sequence similarity for GO input|`faa`genome|length distribution plot and sequence similarity plot `.png`|
 
-###  Whole-genome similarity
-| Script                                             | Species  | Function                  | Input         | Output          |
-| -------------------------------------------------- | -------- | ------------------------- | ------------- | --------------- |
-| `mash_distance.sh`                                 | all      | Calculate Mash distances  | `.fa` genome  | distance matrix |
-| `hap2_vs_groen_genepair.sh` / `hap2_vs_pyr_paf.sh` | all      | Pairwise genome alignment | `.fa` genomes | `.paf`          |
-| `dotplot_pyr_compare_groen.sh`                     | C.pyrenaica and C.groenlandica | Dotplot comparison        | `.paf`        | `.pdf`          |
-
-### Data visualisation
-| Script                                         | Species     | Function                             | Input         | Output |
-| ---------------------------------------------- | ----------- | ------------------------------------ | ------------- | ------ |
-| `Length_distribution_Sequence_similarity_R.sh` | C.groenlandica and  C.hap2 | Length & identity distribution plots | ortholog list | `.pdf` |
-| `pca_R.sh`                                    | C.groenlandica and  C.hap2 | PCA plots                            | TE matrix     | `.pdf` |
-| `R_Copy_number.sh`                             | C.groenlandica and C.hap2 | Gene copy number plot                | annotation    | `.pdf` |
 
 ## Data Aviliable
 ### This repository does not include raw datasets (FASTQ/VCF etc.) because of controlled data policies. All analyses are documented with scripts and small example files only.
