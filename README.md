@@ -2,10 +2,11 @@
 
 ## Background
 Allopolyploid species arise from hybridization between different parental species, combining two or more distinct genomes. Cochlearia danica is an allopolyploid/ allohexaploid plant with multiple haplotypes, and its origin has been debated. In this study, I focus on haplotype 2 (hap2) and compare it with two pptencial parents: C. groenlandica and C. pyrenaica.
+
 The goals are to:
-Assess genome quality and select suitable assemblies for comparison.
-Compare genome-wide similarity, structural conservation, and transposable element (TE) composition.
-Identify functional gene divergence that may underlie adaptive evolution after allopolyploidization.
+ check genome quality and choose good assemblies for comparison;
+ Compare whole-genome similarity, structure, and transposable element (TE) content.
+ Find gene differences that may explain adaptation after allopolyploidy.
 ## Workflow
 ### 
     A[Genome assemblies] --> B[Quality assessment: gfastats + Compleasm]
@@ -21,40 +22,40 @@ Identify functional gene divergence that may underlie adaptive evolution after a
     E --> L[Dotplot visualisation]
 
 ##  Folders and scripts
-
 All scripts are `sbatch` jobs for Ada HPC. ‘awk’ works were run locally on my laptop since they finish much faster without queuing. 
-- Conda environments needed such as `gfastats_env`, `compleasm_env`, `repeatmasker_env`, `edta_env`, `orthofinder_env` , and an R environment with topGO and ggplot2.  
-### 1. `Genome_Quality/`
-- `gfastats_*.sh` – run gfastats to get contig and scaffold statistics.  
-- `compleasm_*.sh` – run Compleasm with BUSCO (brassicales lineage) to check assembly completeness (tested with 1 Mb and 10 Mb cutoffs).  
+Conda environments needed such as `gfastats_env`, `compleasm_env`, `repeatmasker_env`, `edta_env`, `orthofinder_env` , and an R environment with topGO and ggplot2.  
+###  `Genome_Quality/`
+`gfastats_*.sh` – run gfastats to get contig and scaffold statistics.  
+`compleasm_*.sh` – run Compleasm with BUSCO (brassicales lineage) to check assembly completeness (tested with 1 Mb and 10 Mb cut-offs).  
 
-### 2. `TE/`
-- `EDTA_*.sh` – run EDTA for de novo TE annotation.  
-- `RepeatMasker_*.sh` – run RepeatMasker with `-species viridiplantae` to identify repeats.  
-- `TE_length_awk_summary.sh` – calculate genome coverage and TE class lengths.  
-- `TE_statistics_*.sh` – check overlap between TE and CDS using bedtools.  
-- `TE_PCA_R.sh` – PCA of TE composition.  
-- `TE_composition_R.sh` – barplots of TE classes.
+###  `TE/`
+`EDTA_*.sh` – run EDTA for de novo TE annotation.  
+`RepeatMasker_*.sh` – run RepeatMasker with `-species viridiplantae` to identify repeats.  
+`TE_length_awk_summary.sh` – calculate genome coverage and TE class lengths.  
+`TE_statistics_*.sh` – check overlap between TE and CDS using bedtools.  
+`TE_PCA_R.sh` – PCA of TE composition.  
+`TE_composition_R.sh` – barplots of TE classes.
   
-### 3. `OrthoFinder/`
-- `Prokka_*.sh` – annotate CDS and proteins with Prokka.  
-- `OrthoFinder_Groen_Hap2.sh` – find orthologous genes with OrthoFinder.  
-- `Mash_*.sh` – compute genome distances with Mash
-- `Groen_Hap2_PAFfile_for_dotplot.sh` – minimap2 alignment for dotplots.  
+###  `OrthoFinder/`
+`Prokka_*.sh` – annotate CDS and proteins with Prokka.  
+`OrthoFinder_Groen_Hap2.sh` – find orthologous genes with OrthoFinder.  
+`Mash_*.sh` – compute genome distances with Mash
+`Groen_Hap2_PAFfile_for_dotplot.sh` – minimap2 alignment for dotplots.  
 
-### 4. `GOenrichment/`
-- `TOPGO_BP_MF_*.sh` – GO enrichment tests (BP and MF) using topGO.  
-- `Length_distribution_and_Sequence_similarity_R.sh` – plot protein length distributions and similarities.  
-- `seqkit_for_Pannzer2.sh` – prepare sequences for Pannzer2 functional annotation.  
-- `single_copy_gene_hap2_groenlandica.sh` – prepare single-copy orthologs for GO.  
+###  `GOenrichment/`
+`TOPGO_BP_MF_*.sh` – GO enrichment tests (BP and MF) using topGO.  
+`Length_distribution_and_Sequence_similarity_R.sh` – plot protein length distributions and similarities.  
+`seqkit_for_Pannzer2.sh` – prepare sequences for Pannzer2 functional annotation.  
+`single_copy_gene_hap2_groenlandica.sh` – prepare single-copy orthologs for GO.  
 
 ##  Scripts Index 
-### All scripts in folders were developed by me. Where adapted from external sources, I have cited and credited the original authors in the script headers and in the References below.
+### I wrote all the scripts in these folders. The tools I used (e.g. Prokka, OrthoFinder, EDTA, etc.) are properly cited in the script headers and in the References.
 ##### Note on Species Names
 During earlier stages of this project, some species names were mistakenly written with the wrong spelling in the code, figures, or documentation. Please note the correct names below:
 Cochlearia groenlandica (sometimes incorrectly written as greenlandic)
 Cochlearia pyrenaica (sometimes incorrectly written as pyrenica)
 These have now been corrected in the report and will be gradually updated across the repository.
+
 ### Genome quality assessment
 | Script                                                         | Species     | Function                                  | Input        | Output                 |
 | -------------------------------------------------------------- | ----------- | ----------------------------------------- | ------------ | ---------------------- |
@@ -88,7 +89,8 @@ These have now been corrected in the report and will be gradually updated across
 
 
 ## Data Aviliable
-### This repository does not include raw datasets (FASTQ/VCF etc.) because of controlled data policies. All analyses are documented with scripts and small example files only.
+### This project does not include raw data files (like FASTQ or VCF) because I cannot share them(controlled data policy).  Here I only put the scripts and some small test files to show how the analysis was done.
+
 ## Data sources & formats
 #### Genomes: PacBio HiFi assemblies with Hi-C scaffolding for all species.
 #### Annotation: Prokka v1.14 for protein coding genes; TE annotation by EDTA & RepeatMasker.
@@ -104,9 +106,9 @@ These have now been corrected in the report and will be gradually updated across
 
 ## Results preview
 #### Protein length comparison:
-###### Most hap2 vs C. groenlandica orthologous proteins lie close to the diagonal, indicating near-identical lengths
+###### Most ortholog proteins between hap2 and C. groenlandica are near the diagonal line, which shows their lengths are almost the same.
 #### Pairwise global identity distribution:
-###### A single strong peak at 100% identity indicates extremely close evolutionary relationship:
+###### A single strong peak at 100% identity indicates extremely close evolutionary relationship.
 #### TE composition PCA:
 ###### PCA based on LTR, LINE, and SINE content shows hap2 clustering with C. groenlandica:
 
