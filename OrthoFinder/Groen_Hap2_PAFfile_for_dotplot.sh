@@ -63,3 +63,39 @@ p2 <- ggplot(paf2, aes(x=rstart, xend=rend, y=qstart, yend=qend)) +
 
 #showing togetehr
 p1 + p2 + plot_layout(ncol = 2)
+
+
+# coverage and sequence identity,it's also perfomed on local, because I have too many work submit at the same time:(
+(mash_env)[alyjh38@hpclogin01(Ada) groenlandica]$ awk -v L=10000 -v Q=0 '
+> function pid_from_line(   m) {
+>   if (match($0,/de:f:([0-9.]+)/,m)) return 1 - m[1];         #  de:f:divergence
+>   if (match($0,/dv:f:([0-9.]+)/,m)) return 1 - m[1];         #  dv:f:
+>   if (match($0,/NM:i:([0-9]+)/,m)) return $10/($10 + m[1]);  # NM:i:edits(matcher/(matches+edits)
+>   return $10/$11;                                            # or return nmatch($10)/alen($11)
+> }
+
+> ($11+0)>=L && ($12+0)>=Q { if ($0 !~ /tp:A:S/) {             # filtering(PAF$11 alen + MAPQ$12),then delete secondary aligned.
+>     pid = pid_from_line(); sumw += $11; sump += pid*$11;
+> }}
+> END{ if(sumw>0) printf("Length-weighted PID = %.2f%%\n", 100*sump/sumw);
+>      else print "No alignments after filters"; }'  groen_vs_hap2.paf #sumw += $11 as weighting. weighting*PID 
+Length-weighted PID = 97.21%
+
+ # from PAF, extarcting ref $6、$8、$9列）
+(mash_env)[alyjh38@hpclogin01(Ada) groenlandica]$ awk -v L=10000 -v Q=0 '($11+0)>=L && ($12+0)>=Q { if ($0 !~ /tp:A:S/) 
+>   print $6, $8, $9 }' OFS='\t' groen_vs_hap2.paf \
+> | sort -k1,1 -k2,2n \
+> | awk 'BEGIN{cov=0; c=""; s=-1; e=-1} # scan by section according to contig,merge adjacent and overleaping, and cumulative length if ont overleaping. then output
+>        { if($1!=c){ if(c!="") cov+=e-s; c=$1; s=$2; e=$3;
+>                     next }
+>          if($2>e){ cov+=e-s; s=$2; e=$3 }
+>          else if($3>e){ e=$3 } }
+>        END{ if(c!="") cov+=e-s; print cov }' > cov_on_hap2.bp
+(mash_env)[alyjh38@hpclogin01(Ada) groenlandica]$ cat  cov_on_hap2.bp
+182803360
+(mash_env)[alyjh38@hpclogin01(Ada) groenlandica]$ awk 'BEGIN{sum=0;len=0}
+>      /^>/ { if(NR>1) sum+=len; len=0; next }
+>      { gsub(/\r/,""); len+=length($0) }
+>      END{ sum+=len; print sum }'  CDAN001_n3.hic.hap2.p_ctg_large_contigs.fa > hap2_len.bp# total hap2 length
+(mash_env)[alyjh38@hpclogin01(Ada) groenlandica]$ paste cov_on_hap2.bp hap2_len.bp | awk '{printf("Coverage on hap2 = %.2f%%\n",100*$1/$2)}'
+Coverage on hap2 = 79.14%
